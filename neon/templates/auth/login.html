@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <section class="hero is-light is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Login
+                </h1>
+                <h2 class="subtitle">
+                    Manage your account.
+                </h2>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <form action="" method="post">
+                            {{ form.csrf_token }}
+
+                            <div class="field">
+                                {{ form.email.label(class="label") }}
+                                <div class="control">
+                                    {{ form.email(class="input") }}
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                {{ form.password.label(class="label") }}
+                                <div class="control">
+                                    {{ form.password(class="input") }}
+                                </div>
+                            </div>
+
+                            {% if form.errors %}
+                                <article class="message is-danger">
+                                    <div class="message-body">
+                                        <ul class="errors">
+                                            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                                                {% for error in field_errors %}
+                                                    <li>{{ form[field_name].label }}: {{ error }}</li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </article>
+                            {% endif %}
+
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-info" type="submit">Sign in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

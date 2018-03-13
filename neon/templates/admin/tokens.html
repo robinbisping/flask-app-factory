@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block h1 %}Account{% endblock %}
+{% block h2 %}Manage your tokens.{% endblock %}
+
+{% block content %}
+    <nav class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <p class="subtitle">
+                    <strong>{{ tokens|length }}</strong> token{% if not tokens|length == 1 %}s{% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="level-right">
+            <p class="level-item"><a href="{{ url_for("admin.add_token") }}" class="button is-success">New token</a></p>
+        </div>
+    </nav>
+
+    {%  if tokens %}
+        <table class="table is-hoverable is-striped is-fullwidth">
+            <thead>
+            <tr>
+                <th>Token</th>
+                <th>Last login</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for token in tokens %}
+                <tr>
+                    <th>{{ token.token }}</th>
+                    <th>{{ token.last_login }}</th>
+                    <th><a href="{{ url_for("admin.delete_token", token_id=token.id) }}" class="delete"></a></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <article class="message">
+            <div class="message-body">
+                No tokens found.
+            </div>
+        </article>
+    {% endif %}
+{% endblock %}

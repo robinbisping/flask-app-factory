@@ -1,0 +1,2 @@
+recursive-include neon/templates *
+recursive-include neon/static *

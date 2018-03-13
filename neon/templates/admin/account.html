@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block h1 %}Account{% endblock %}
+{% block h2 %}Manage your account.{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.csrf_token }}
+
+        <div class="field">
+            {{ form.email.label(class="label") }}
+            <div class="control">
+                {{ form.email(class="input", value=user.email) }}
+            </div>
+        </div>
+
+        <div class="field">
+            {{ form.password.label(class="label") }}
+            <div class="control">
+                {{ form.password(class="input") }}
+            </div>
+        </div>
+
+        {% if form.errors %}
+            <article class="message is-danger">
+                <div class="message-body">
+                    <ul class="errors">
+                        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                            {% for error in field_errors %}
+                                <li>{{ form[field_name].label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </article>
+        {% endif %}
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-success" type="submit">Update</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

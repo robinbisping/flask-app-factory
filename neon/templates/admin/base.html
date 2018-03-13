@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    {% include "admin/includes/navbar.html" %}
+
+    <section class="hero is-info">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    {% block h1 %}Admin{% endblock %}
+                </h1>
+                <h2 class="subtitle">
+                    {% block h2 %}Manage your application.{% endblock %}
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-top:40px">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3">
+                    {% include "admin/includes/menu.html" %}
+                </div>
+                <div class="column is-9">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
